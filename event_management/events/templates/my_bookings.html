@@ -1,0 +1,530 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <!-- HEADER -->
+
+    <div class="booking-premium-header">
+
+        <h1>
+
+            🎫 My Bookings
+
+        </h1>
+
+        <p>
+
+            Manage all your booked tickets and event experiences
+
+        </p>
+
+    </div>
+
+    {% if bookings %}
+
+    <div class="row">
+
+        {% for booking in bookings %}
+
+        <div class="col-lg-12 mb-5">
+
+            <div class="booking-card-premium vip-ticket">
+
+                <!-- VIP RIBBON -->
+
+                <div class="booking-ribbon">
+
+                    VERIFIED
+
+                </div>
+
+                <!-- EVENT IMAGE -->
+
+                {% if booking.event.image %}
+
+                <img
+                    src="{{ booking.event.image.url }}"
+                    class="booking-event-image">
+
+                {% endif %}
+
+                <div class="booking-content">
+
+                    <!-- TOP SECTION -->
+
+                    <div class="d-flex justify-content-between align-items-center flex-wrap">
+
+                        <div>
+
+                            <h2>
+
+                                {{ booking.event.title }}
+
+                            </h2>
+
+                            <p>
+
+                                Booking Reference:
+                                #{{ booking.id }}
+
+                            </p>
+
+                        </div>
+
+                        <div class="verified-ticket">
+
+                            ✓ Active Ticket
+
+                        </div>
+
+                    </div>
+
+                    <hr>
+
+                    <!-- INFO -->
+
+                    <div class="row">
+
+                        <div class="col-md-3">
+
+                            <div class="detail-box">
+
+                                👤 {{ booking.user.username }}
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-3">
+
+                            <div class="detail-box">
+
+                                🎟 {{ booking.quantity }} Ticket(s)
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-3">
+
+                            <div class="detail-box">
+
+                                📅 {{ booking.event.date }}
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-3">
+
+                            <div class="detail-box">
+
+                                📍 {{ booking.event.venue }}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- PAYMENT -->
+
+                    <div class="payment-card mt-4">
+
+                        <h4>
+
+                            💳 Payment Information
+
+                        </h4>
+
+                        <p>
+
+                            Status:
+                            <span class="text-success">
+
+                                Paid
+
+                            </span>
+
+                        </p>
+
+                        <p>
+
+                            Transaction ID:
+                            TXN{{ booking.id }}
+
+                        </p>
+
+                    </div>
+
+                    <!-- ATTENDEE -->
+
+                    <div class="attendee-card">
+
+                        <h4>
+
+                            👤 Attendee Details
+
+                        </h4>
+
+                        <p>
+
+                            Name:
+                            {{ booking.user.username }}
+
+                        </p>
+
+                        <p>
+
+                            Email:
+                            {{ booking.user.email }}
+
+                        </p>
+
+                    </div>
+
+                    <!-- SEAT -->
+
+                    <div class="seat-card">
+
+                        <h4>
+
+                            💺 Seat Information
+
+                        </h4>
+
+                        <p>
+
+                            Section A - Seat {{ booking.id }}
+
+                        </p>
+
+                    </div>
+
+                    <!-- COUNTDOWN -->
+
+                    <div class="countdown-box">
+
+                        <h5>
+
+                            ⏳ Upcoming Event
+
+                        </h5>
+
+                        <h2>
+
+                            READY
+
+                        </h2>
+
+                    </div>
+
+                    <!-- TIMELINE -->
+
+                    <div class="timeline-card">
+
+                        <h4>
+
+                            🕒 Event Timeline
+
+                        </h4>
+
+                        <div class="timeline-step">
+
+                            Registration
+
+                        </div>
+
+                        <div class="timeline-step">
+
+                            Opening Session
+
+                        </div>
+
+                        <div class="timeline-step">
+
+                            Main Event
+
+                        </div>
+
+                        <div class="timeline-step">
+
+                            Networking
+
+                        </div>
+
+                        <div class="timeline-step">
+
+                            Closing Ceremony
+
+                        </div>
+
+                    </div>
+
+                    <!-- FACILITIES -->
+
+                    <div class="facilities-card">
+
+                        <h4>
+
+                            🏢 Facilities
+
+                        </h4>
+
+                        <div class="facility-item">
+
+                            Free WiFi
+
+                        </div>
+
+                        <div class="facility-item">
+
+                            Parking
+
+                        </div>
+
+                        <div class="facility-item">
+
+                            Food Court
+
+                        </div>
+
+                        <div class="facility-item">
+
+                            Security Service
+
+                        </div>
+
+                    </div>
+
+                    <!-- RULES -->
+
+                    <div class="rules-card">
+
+                        <h4>
+
+                            📜 Event Rules
+
+                        </h4>
+
+                        <ul>
+
+                            <li>Bring valid ID proof.</li>
+
+                            <li>QR code mandatory.</li>
+
+                            <li>No outside food allowed.</li>
+
+                            <li>Follow organizer instructions.</li>
+
+                        </ul>
+
+                    </div>
+
+                    <!-- QR -->
+
+                    {% if booking.qr_code %}
+
+                    <div class="qr-preview">
+
+                        <h4>
+
+                            QR Entry Pass
+
+                        </h4>
+
+                        <img
+                            src="{{ booking.qr_code.url }}">
+                    </div>
+
+                    {% endif %}
+
+                    <!-- ORGANIZER -->
+
+                    <div class="organizer-card">
+
+                        <div class="organizer-avatar">
+
+                            👨‍💼
+
+                        </div>
+
+                        <div>
+
+                            <h5>
+
+                                Organizer
+
+                            </h5>
+
+                            <p>
+
+                                Event Management Team
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <!-- MAP -->
+
+
+   
+<div class="glass-card p-4 mt-4">
+
+    <h3>📍 Event Location</h3>
+
+    <iframe
+        src="https://maps.google.com/maps?q={{ event.location|urlencode }}&t=&z=13&ie=UTF8&iwloc=&output=embed">
+    </iframe>
+
+</div>
+
+
+                    <!-- ACTIONS -->
+
+                    <div class="row mt-4">
+
+                        <div class="col-md-3">
+
+                            <a
+                            href="{% url 'download_ticket' booking.id %}"
+                            class="btn btn-premium w-100">
+
+                                📄 PDF Ticket
+
+                            </a>
+
+                        </div>
+
+                        <div class="col-md-3">
+
+                            <a
+                            href="{% url 'event_detail' booking.event.id %}"
+                            class="btn btn-success w-100">
+
+                                View Event
+
+                            </a>
+
+                        </div>
+
+                        <div class="col-md-3">
+
+                            <button
+                            onclick="window.print()"
+                            class="btn btn-dark w-100">
+
+                                🖨 Print
+
+                            </button>
+
+                        </div>
+
+                        <div class="col-md-3">
+
+                            <button
+                            class="btn btn-warning w-100">
+
+                                ⭐ Rate Event
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <!-- SHARE -->
+
+                    <div class="share-buttons mt-4">
+
+                        <a href="#" class="share-btn">
+
+                            <i class="bi bi-facebook"></i>
+
+                        </a>
+
+                        <a href="#" class="share-btn">
+
+                            <i class="bi bi-whatsapp"></i>
+
+                        </a>
+
+                        <a href="#" class="share-btn">
+
+                            <i class="bi bi-instagram"></i>
+
+                        </a>
+
+                        <a href="#" class="share-btn">
+
+                            <i class="bi bi-twitter-x"></i>
+
+                        </a>
+
+                    </div>
+
+                    <!-- FOOTER -->
+
+                    <div class="ticket-footer">
+
+                        <h5>
+
+                            🎉 Enjoy Your Event
+
+                        </h5>
+
+                        <p>
+
+                            Thank you for booking with EventHub.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% else %}
+
+    <div class="empty-booking">
+
+        <i class="bi bi-ticket-perforated-fill"></i>
+
+        <h2>
+
+            No Bookings Yet
+
+        </h2>
+
+        <p>
+
+            Browse events and reserve your tickets.
+
+        </p>
+
+        <a
+        href="{% url 'event_list' %}"
+        class="btn btn-premium">
+
+            Browse Events
+
+        </a>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

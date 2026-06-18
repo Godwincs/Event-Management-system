@@ -1,0 +1,377 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <!-- SUCCESS HEADER -->
+
+    <div class="booking-premium-header text-center">
+
+        <div class="success-icon">
+
+            ✓
+
+        </div>
+
+        <h1>
+
+            Booking Successful
+
+        </h1>
+
+        <p>
+
+            Your ticket has been confirmed successfully.
+
+        </p>
+
+    </div>
+
+    <!-- SUCCESS CARD -->
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-8">
+
+            <div class="booking-card-premium">
+
+                <div class="verified-ticket mb-4">
+
+                    ✓ VERIFIED BOOKING
+
+                </div>
+
+                <h2>
+
+                    {{ booking.event.title }}
+
+                </h2>
+
+                <hr>
+
+                <!-- BOOKING INFO -->
+
+                <div class="row">
+
+                    <div class="col-md-6">
+
+                        <div class="detail-box">
+
+                            🎫 Booking ID
+
+                            <br>
+
+                            <strong>
+
+                                #{{ booking.id }}
+
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <div class="detail-box">
+
+                            👤 Attendee
+
+                            <br>
+
+                            <strong>
+
+                                {{ booking.user.username }}
+
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="row mt-3">
+
+                    <div class="col-md-6">
+
+                        <div class="detail-box">
+
+                            📅 Event Date
+
+                            <br>
+
+                            <strong>
+
+                                {{ booking.event.date }}
+
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <div class="detail-box">
+
+                            🕒 Event Time
+
+                            <br>
+
+                            <strong>
+
+                                {{ booking.event.time }}
+
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="row mt-3">
+
+                    <div class="col-md-6">
+
+                        <div class="detail-box">
+
+                            📍 Venue
+
+                            <br>
+
+                            <strong>
+
+                                {{ booking.event.venue }}
+
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <div class="detail-box">
+
+                            🎟 Tickets
+
+                            <br>
+
+                            <strong>
+
+                                {{ booking.quantity }}
+
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- QR CODE -->
+
+                {% if booking.qr_code %}
+
+                <div class="qr-preview mt-4">
+
+                    <h4>
+
+                        QR Entry Pass
+
+                    </h4>
+
+                    <img
+                        src="{{ booking.qr_code.url }}"
+                        alt="QR Code">
+
+                </div>
+
+                {% endif %}
+
+                <!-- TICKET FEATURES -->
+
+                <div class="facilities-card mt-4">
+
+                    <h4>
+
+                        Included Benefits
+
+                    </h4>
+
+                    <div class="facility-item">
+
+                        ✓ Fast Entry Access
+
+                    </div>
+
+                    <div class="facility-item">
+
+                        ✓ QR Verification
+
+                    </div>
+
+                    <div class="facility-item">
+
+                        ✓ Digital Ticket
+
+                    </div>
+
+                    <div class="facility-item">
+
+                        ✓ Event Notifications
+
+                    </div>
+
+                </div>
+
+                <!-- BUTTONS -->
+
+                <div class="row mt-5">
+
+                    <div class="col-md-4">
+
+                        <a
+                        href="{% url 'download_ticket' booking.id %}"
+                        class="btn btn-premium w-100">
+
+                            📄 Download PDF
+
+                        </a>
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <a
+                        href="{% url 'my_bookings' %}"
+                        class="btn btn-success w-100">
+
+                            🎫 My Bookings
+
+                        </a>
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <button
+                        onclick="window.print()"
+                        class="btn btn-dark w-100">
+
+                            🖨 Print
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- NEXT STEPS -->
+
+    <div class="row mt-5">
+
+        <div class="col-md-4">
+
+            <div class="dashboard-card">
+
+                <i class="bi bi-download"></i>
+
+                <h4>
+
+                    Download Ticket
+
+                </h4>
+
+                <p>
+
+                    Save your ticket PDF for offline use.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="dashboard-card">
+
+                <i class="bi bi-qr-code"></i>
+
+                <h4>
+
+                    Show QR Code
+
+                </h4>
+
+                <p>
+
+                    Present QR code at the event entrance.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="dashboard-card">
+
+                <i class="bi bi-calendar-check"></i>
+
+                <h4>
+
+                    Attend Event
+
+                </h4>
+
+                <p>
+
+                    Arrive early and enjoy the experience.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- SUPPORT -->
+
+    <div class="payment-card mt-5">
+
+        <h3>
+
+            📞 Need Assistance?
+
+        </h3>
+
+        <p>
+
+            Email: support@eventhub.com
+
+        </p>
+
+        <p>
+
+            Phone: +91 9876543210
+
+        </p>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,107 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="ticket-download-card">
+
+        <div class="text-center">
+
+            <h1>
+
+                🎫 Ticket Download
+
+            </h1>
+
+            <p>
+
+                Your booking was successful.
+
+            </p>
+
+        </div>
+
+        <div class="ticket-info">
+
+            <h3>
+
+                {{ booking.event.title }}
+
+            </h3>
+
+            <hr>
+
+            <p>
+
+                <strong>Booking ID:</strong>
+
+                #{{ booking.id }}
+
+            </p>
+
+            <p>
+
+                <strong>Name:</strong>
+
+                {{ booking.user.username }}
+
+            </p>
+
+            <p>
+
+                <strong>Venue:</strong>
+
+                {{ booking.event.venue }}
+
+            </p>
+
+            <p>
+
+                <strong>Date:</strong>
+
+                {{ booking.event.date }}
+
+            </p>
+
+            <p>
+
+                <strong>Tickets:</strong>
+
+                {{ booking.quantity }}
+
+            </p>
+
+        </div>
+
+        {% if booking.qr_code %}
+
+        <div class="text-center my-4">
+
+            <img
+                src="{{ booking.qr_code.url }}"
+                width="200">
+
+        </div>
+
+        {% endif %}
+
+        <div class="text-center">
+
+            <a
+            href="{% url 'download_ticket' booking.id %}"
+            class="btn btn-success btn-lg">
+
+                📄 Download PDF Ticket
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+

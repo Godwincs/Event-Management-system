@@ -1,0 +1,495 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <!-- DASHBOARD HEADER -->
+
+    <div class="booking-premium-header">
+
+        <h1>
+
+            📊 Dashboard
+
+        </h1>
+
+        <p>
+
+            Welcome back,
+            {{ request.user.username }}
+
+        </p>
+
+    </div>
+
+    <!-- QUICK STATS -->
+
+    <div class="row mb-5">
+
+        <div class="col-lg-3 col-md-6">
+
+            <div class="dashboard-card">
+
+                <i class="bi bi-calendar-event"></i>
+
+                <h2>
+
+                    {{ total_events }}
+
+                </h2>
+
+                <p>
+
+                    Total Events
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+
+            <div class="dashboard-card">
+
+                <i class="bi bi-ticket-perforated"></i>
+
+                <h2>
+
+                    {{ total_bookings }}
+
+                </h2>
+
+                <p>
+
+                    Bookings
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+
+            <div class="dashboard-card">
+
+                <i class="bi bi-people"></i>
+
+                <h2>
+
+                    {{ total_users }}
+
+                </h2>
+
+                <p>
+
+                    Users
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+
+            <div class="dashboard-card">
+
+                <i class="bi bi-star-fill"></i>
+
+                <h2>
+
+                    4.9
+
+                </h2>
+
+                <p>
+
+                    Rating
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- QUICK ACTIONS -->
+
+    <div class="glass-card p-4 mb-5">
+
+    <h2 class="mb-4">
+
+        🚀 Quick Actions
+
+    </h2>
+
+    <div class="quick-actions-container">
+
+        {% if request.user.is_staff %}
+        <a href="{% url 'create_event' %}"
+           class="quick-action create-action">
+
+            <div class="action-icon">
+
+                ➕
+
+            </div>
+
+            <div class="action-content">
+
+                <h3>
+
+                    Create Event
+
+                </h3>
+
+                <p>
+
+                    Create and publish a new event for users.
+
+                </p>
+
+            </div>
+
+            <div class="action-arrow">
+
+                ➜
+
+            </div>
+
+        </a>
+        {% endif %}
+
+        <a href="{% url 'event_list' %}"
+           class="quick-action event-action">
+
+            <div class="action-icon">
+
+                🎫
+
+            </div>
+
+            <div class="action-content">
+
+                <h3>
+
+                    View Events
+
+                </h3>
+
+                <p>
+
+                    Browse all available events and details.
+
+                </p>
+
+            </div>
+
+            <div class="action-arrow">
+
+                ➜
+
+            </div>
+
+        </a>
+
+        <a href="{% url 'my_bookings' %}"
+           class="quick-action booking-action">
+
+            <div class="action-icon">
+
+                📄
+
+            </div>
+
+            <div class="action-content">
+
+                <h3>
+
+                    My Bookings
+
+                </h3>
+
+                <p>
+
+                    View booked tickets and booking history.
+
+                </p>
+
+            </div>
+
+            <div class="action-arrow">
+
+                ➜
+
+            </div>
+
+        </a>
+
+    </div>
+
+</div>
+
+    <!-- RECENT BOOKINGS -->
+
+    <div class="booking-card-premium">
+
+        <h3>
+
+            🎟 Recent Bookings
+
+        </h3>
+
+        <hr>
+
+        {% for booking in recent_bookings %}
+
+        <div class="detail-box">
+
+            <strong>
+
+                {{ booking.event.title }}
+
+            </strong>
+
+            <br>
+
+            {{ booking.user.username }}
+
+            |
+
+            {{ booking.booking_date }}
+
+        </div>
+
+        {% empty %}
+
+        <p>
+
+            No bookings found.
+
+        </p>
+
+        {% endfor %}
+
+    </div>
+
+    <!-- RECENT EVENTS -->
+
+    <div class="booking-card-premium mt-4">
+
+        <h3>
+
+            🎉 Recent Events
+
+        </h3>
+
+        <hr>
+
+        <div class="row">
+
+            {% for event in recent_events %}
+
+            <div class="col-lg-4">
+
+                <div class="event-card">
+
+                    {% if event.image %}
+
+                    <img
+                        src="{{ event.image.url }}">
+
+                    {% endif %}
+
+                    <div class="event-card-body">
+
+                        <h4>
+
+                            {{ event.title }}
+
+                        </h4>
+
+                        <p>
+
+                            {{ event.venue }}
+
+                        </p>
+
+                        <a
+                        href="{% url 'event_detail' event.id %}"
+                        class="btn btn-premium">
+
+                            View
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+    <!-- ACTIVITY TIMELINE -->
+
+    <div class="timeline-card mt-4">
+
+        <h3>
+
+            📈 Activity Timeline
+
+        </h3>
+
+        <div class="timeline-step">
+
+            Event Created
+
+        </div>
+
+        <div class="timeline-step">
+
+            Tickets Published
+
+        </div>
+
+        <div class="timeline-step">
+
+            Bookings Received
+
+        </div>
+
+        <div class="timeline-step">
+
+            Event Scheduled
+
+        </div>
+
+    </div>
+
+    <!-- ACCOUNT DETAILS -->
+
+    <div class="attendee-card mt-4">
+
+        <h3>
+
+            👤 Account Information
+
+        </h3>
+
+        <p>
+
+            Username:
+            {{ request.user.username }}
+
+        </p>
+
+        <p>
+
+            Email:
+            {{ request.user.email }}
+
+        </p>
+
+        <p>
+
+            Member Status:
+            Premium User
+
+        </p>
+
+    </div>
+
+    <!-- EVENT PERFORMANCE -->
+
+    <div class="payment-card mt-4">
+
+        <h3>
+
+            📊 Event Performance
+
+        </h3>
+
+        <div class="row">
+
+            <div class="col-md-4">
+
+                <div class="detail-box">
+
+                    🎫 Tickets Sold
+
+                    <br>
+
+                    500+
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="detail-box">
+
+                    👥 Visitors
+
+                    <br>
+
+                    1500+
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="detail-box">
+
+                    ⭐ Ratings
+
+                    <br>
+
+                    4.9/5
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- SUPPORT -->
+
+    <div class="ticket-footer mt-5">
+
+        <h4>
+
+            📞 Support Center
+
+        </h4>
+
+        <p>
+
+            support@eventhub.com
+
+        </p>
+
+        <p>
+
+            +91 9876543210
+
+        </p>
+
+    </div>
+
+</div>
+
+{% endblock %}

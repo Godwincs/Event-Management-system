@@ -1,0 +1,339 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <!-- HEADER -->
+
+    <div class="booking-premium-header">
+
+        <h1>
+
+            🎟 Book Your Ticket
+
+        </h1>
+
+        <p>
+
+            Secure your seat for this amazing event
+
+        </p>
+
+    </div>
+
+    <div class="row">
+
+        <!-- EVENT DETAILS -->
+
+        <div class="col-lg-7">
+
+            <div class="booking-card-premium">
+
+                {% if event.image %}
+
+                <img
+                    src="{{ event.image.url }}"
+                    class="booking-event-image"
+                    alt="{{ event.title }}">
+
+                {% endif %}
+
+                <div class="booking-content">
+
+                    <h2>
+
+                        {{ event.title }}
+
+                    </h2>
+
+                    <p>
+
+                        {{ event.description }}
+
+                    </p>
+
+                    <hr>
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+
+                            <div class="detail-box">
+
+                                📅 Event Date
+
+                                <br>
+
+                                <strong>
+
+                                    {{ event.date }}
+
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <div class="detail-box">
+
+                                🕒 Event Time
+
+                                <br>
+
+                                <strong>
+
+                                    {{ event.time }}
+
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row mt-3">
+
+                        <div class="col-md-6">
+
+                            <div class="detail-box">
+
+                                📍 Venue
+
+                                <br>
+
+                                <strong>
+
+                                    {{ event.venue }}
+
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <div class="detail-box">
+
+                                🎟 Available
+
+                                <br>
+
+                                <strong>
+
+                                    {{ event.available_tickets }}
+
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- EVENT BENEFITS -->
+
+            <div class="facilities-card mt-4">
+
+                <h3>
+
+                    🌟 Ticket Benefits
+
+                </h3>
+
+                <div class="facility-item">
+
+                    ✓ Instant Ticket Confirmation
+
+                </div>
+
+                <div class="facility-item">
+
+                    ✓ QR Code Entry Pass
+
+                </div>
+
+                <div class="facility-item">
+
+                    ✓ Download PDF Ticket
+
+                </div>
+
+                <div class="facility-item">
+
+                    ✓ Email Notifications
+
+                </div>
+
+                <div class="facility-item">
+
+                    ✓ Premium Event Access
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- BOOKING FORM -->
+
+        <div class="col-lg-5">
+
+            <div class="booking-card-premium">
+
+                <h3 class="mb-4">
+
+                    Ticket Booking Form
+
+                </h3>
+
+                {% if form.errors %}
+
+                <div class="alert alert-danger">
+
+                    {{ form.errors }}
+
+                </div>
+
+                {% endif %}
+
+                <form method="POST">
+
+                    {% csrf_token %}
+
+                    <div class="form-group mb-4">
+
+                        <label>
+
+                            Number Of Tickets
+
+                        </label>
+
+                        {{ form.quantity }}
+
+                    </div>
+
+                    <div class="payment-card">
+
+                        <h4>
+
+                            Booking Summary
+
+                        </h4>
+
+                        <hr>
+
+                        <p>
+
+                            Event:
+
+                            <strong>
+
+                                {{ event.title }}
+
+                            </strong>
+
+                        </p>
+
+                        <p>
+
+                            Venue:
+
+                            <strong>
+
+                                {{ event.venue }}
+
+                            </strong>
+
+                        </p>
+
+                        <p>
+
+                            Available Tickets:
+
+                            <strong>
+
+                                {{ event.available_tickets }}
+
+                            </strong>
+
+                        </p>
+
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="btn btn-premium w-100 mt-4">
+
+                        🎟 Confirm Booking
+
+                    </button>
+
+                </form>
+
+            </div>
+
+            <!-- SECURITY -->
+
+            <div class="payment-card mt-4">
+
+                <h4>
+
+                    🔒 Secure Booking
+
+                </h4>
+
+                <p>
+
+                    Your booking information is protected
+                    and securely stored.
+
+                </p>
+
+                <div class="verified-ticket">
+
+                    ✓ Verified Event
+
+                </div>
+
+            </div>
+
+            <!-- SUPPORT -->
+
+            <div class="payment-card mt-4">
+
+                <h4>
+
+                    📞 Need Help?
+
+                </h4>
+
+                <p>
+
+                    support@eventhub.com
+
+                </p>
+
+                <p>
+
+                    +91 9876543210
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

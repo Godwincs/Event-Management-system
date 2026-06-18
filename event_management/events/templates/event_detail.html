@@ -1,0 +1,416 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <!-- EVENT BANNER -->
+
+    <div class="event-detail-banner">
+
+        {% if event.image %}
+
+        <img
+            src="{{ event.image.url }}"
+            class="event-banner-img">
+
+        {% endif %}
+
+        <div class="banner-overlay">
+
+            <h1>
+
+                {{ event.title }}
+
+            </h1>
+
+            <p>
+
+                {{ event.venue }}
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- EVENT INFO -->
+
+    <div class="row mt-5">
+
+        <div class="col-lg-8">
+
+            <div class="glass-card p-4">
+
+                <h2>
+
+                    About Event
+
+                </h2>
+
+                <p>
+
+                    {{ event.description }}
+
+                </p>
+
+            </div>
+
+            <!-- EVENT SCHEDULE -->
+
+            <div class="timeline-card mt-4">
+
+                <h3>
+
+                    🕒 Event Schedule
+
+                </h3>
+
+                <div class="timeline-step">
+
+                    Registration
+
+                </div>
+
+                <div class="timeline-step">
+
+                    Opening Ceremony
+
+                </div>
+
+                <div class="timeline-step">
+
+                    Main Event
+
+                </div>
+
+                <div class="timeline-step">
+
+                    Networking Session
+
+                </div>
+
+                <div class="timeline-step">
+
+                    Closing Ceremony
+
+                </div>
+
+            </div>
+
+            <!-- FACILITIES -->
+
+            <div class="facilities-card mt-4">
+
+                <h3>
+
+                    🏢 Facilities
+
+                </h3>
+
+                <div class="facility-item">
+
+                    Free WiFi
+
+                </div>
+
+                <div class="facility-item">
+
+                    Parking Available
+
+                </div>
+
+                <div class="facility-item">
+
+                    Food Court
+
+                </div>
+
+                <div class="facility-item">
+
+                    Security Service
+
+                </div>
+
+            </div>
+
+            <!-- RULES -->
+
+            <div class="rules-card mt-4">
+
+                <h3>
+
+                    📜 Event Rules
+
+                </h3>
+
+                <ul>
+
+                    <li>Bring valid ID proof.</li>
+
+                    <li>Follow organizer instructions.</li>
+
+                    <li>No outside food allowed.</li>
+
+                    <li>QR ticket required for entry.</li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+        <!-- SIDEBAR -->
+
+        <div class="col-lg-4">
+
+            <div class="booking-card-premium">
+
+                <h3>
+
+                    Event Details
+
+                </h3>
+
+                <hr>
+
+                <p>
+
+                    📅 <strong>Date:</strong>
+
+                    {{ event.date }}
+
+                </p>
+
+                <p>
+
+                    🕒 <strong>Time:</strong>
+
+                    {{ event.time }}
+
+                </p>
+
+              <p>
+    📍 <strong>Venue:</strong>
+    {{ event.venue }}
+
+<div class="glass-card p-4 mt-4">
+
+    <h3>📍 Event Location</h3>
+
+    <iframe
+        src="https://maps.google.com/maps?q={{ event.location|urlencode }}&t=&z=13&ie=UTF8&iwloc=&output=embed">
+    </iframe>
+
+</div>
+             <p>
+
+                    🎟 <strong>Available Tickets:</strong>
+
+                    {{ event.available_tickets }}
+
+                </p>
+
+                <p>
+
+                    🎫 <strong>Total Tickets:</strong>
+
+                    {{ event.total_tickets }}
+
+                </p>
+
+                <div class="verified-ticket mt-3">
+
+                    ✓ Verified Event
+
+                </div>
+
+               <div class="d-grid mt-4">
+
+    <a
+    href="{% url 'book_ticket' event.id %}"
+    class="btn btn-premium">
+
+        🎟 Book Ticket
+
+    </a>
+
+</div>
+
+{% if request.user.is_staff %}
+
+<div class="admin-actions mt-3">
+
+    <a
+    href="{% url 'edit_event' event.id %}"
+    class="btn btn-warning">
+
+        ✏️ Edit Event
+
+    </a>
+
+    <a
+    href="{% url 'delete_event' event.id %}"
+    class="btn btn-danger">
+
+        🗑 Delete Event
+
+    </a>
+
+</div>
+
+{% endif %}
+
+            </div>
+
+            <!-- ORGANIZER -->
+
+            <div class="organizer-card mt-4">
+
+                <div class="organizer-avatar">
+
+                    👨‍💼
+
+                </div>
+
+                <div>
+
+                    <h5>
+
+                        Organizer
+
+                    </h5>
+
+                    <p>
+
+                        Event Management Team
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- COUNTDOWN -->
+
+            <div class="countdown-box mt-4">
+
+                <h5>
+
+                    ⏳ Upcoming Event
+
+                </h5>
+
+                <h2>
+
+                    Ready
+
+                </h2>
+
+            </div>
+
+            <!-- SHARE -->
+
+            <div class="share-buttons mt-4">
+
+                <a href="#"
+                   class="share-btn">
+
+                    <i class="bi bi-facebook"></i>
+
+                </a>
+
+                <a href="#"
+                   class="share-btn">
+
+                    <i class="bi bi-instagram"></i>
+
+                </a>
+
+                <a href="#"
+                   class="share-btn">
+
+                    <i class="bi bi-twitter-x"></i>
+
+                </a>
+
+                <a href="#"
+                   class="share-btn">
+
+                    <i class="bi bi-whatsapp"></i>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- MAP -->
+
+   
+
+    <!-- RELATED EVENTS -->
+
+    <div class="mt-5">
+
+        <h2 class="text-center mb-4">
+
+            Recommended Events
+
+        </h2>
+
+        <div class="row">
+
+            {% for e in related_events %}
+
+            <div class="col-md-4">
+
+                <div class="event-card">
+
+                    {% if e.image %}
+
+                    <img
+                        src="{{ e.image.url }}">
+
+                    {% endif %}
+
+                    <div class="event-card-body">
+
+                        <h4>
+
+                            {{ e.title }}
+
+                        </h4>
+
+                        <p>
+
+                            {{ e.venue }}
+
+                        </p>
+
+                        <a
+                        href="{% url 'event_detail' e.id %}"
+                        class="btn btn-premium">
+
+                            View
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+     
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,439 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <!-- HEADER -->
+
+    <div class="booking-premium-header">
+
+        <h1>
+
+            🚀 Create Event
+
+        </h1>
+
+        <p>
+
+            Create and publish professional events
+
+        </p>
+
+    </div>
+
+    <div class="row">
+
+        <!-- FORM SECTION -->
+
+        <div class="col-lg-8">
+
+            <div class="booking-card-premium">
+
+                <h3>
+
+                    🎉 Event Information
+
+                </h3>
+
+                <hr>
+
+                <form method="POST"
+                      enctype="multipart/form-data">
+
+                    {% csrf_token %}
+
+                    {% if form.errors %}
+
+                    <div class="alert alert-danger">
+
+                        {{ form.errors }}
+
+                    </div>
+
+                    {% endif %}
+
+                    <!-- TITLE -->
+
+                    <div class="form-box">
+
+                        <label>
+
+                            Event Title
+
+                        </label>
+
+                        {{ form.title }}
+
+                    </div>
+
+                    <!-- VENUE -->
+
+                    <div class="form-box">
+
+                        <label>
+
+                            Venue
+
+                        </label>
+
+                        {{ form.venue }}
+
+                    </div>
+
+    <div class="form-box">
+
+        <label>
+
+            Event Location
+
+        </label>
+
+        {{ form.location }}
+
+</div>
+                    <!-- DATE & TIME -->
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+
+                            <div class="form-box">
+
+                                <label>
+
+                                    Event Date
+
+                                </label>
+
+                                {{ form.date }}
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <div class="form-box">
+
+                                <label>
+
+                                    Event Time
+
+                                </label>
+
+                                {{ form.time }}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- TICKETS -->
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+
+                            <div class="form-box">
+
+                                <label>
+
+                                    Total Tickets
+
+                                </label>
+
+                                {{ form.total_tickets }}
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <div class="form-box">
+
+                                <label>
+
+                                    Available Tickets
+
+                                </label>
+
+                                {{ form.available_tickets }}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- DESCRIPTION -->
+
+                    <div class="form-box">
+
+                        <label>
+
+                            Description
+
+                        </label>
+
+                        {{ form.description }}
+
+                    </div>
+
+                    <!-- IMAGE -->
+
+                    <div class="upload-zone">
+
+                        <i class="bi bi-cloud-arrow-up-fill"></i>
+
+                        <h4>
+
+                            Upload Event Banner
+
+                        </h4>
+
+                        {{ form.image }}
+
+                    </div>
+
+                    <!-- FEATURES -->
+
+                    <div class="facilities-card mt-4">
+
+                        <h4>
+
+                            🌟 Included Features
+
+                        </h4>
+
+                        <div class="facility-item">
+
+                            QR Ticket Generation
+
+                        </div>
+
+                        <div class="facility-item">
+
+                            PDF Ticket Download
+
+                        </div>
+
+                        <div class="facility-item">
+
+                            Booking Dashboard
+
+                        </div>
+
+                        <div class="facility-item">
+
+                            Analytics Tracking
+
+                        </div>
+
+                    </div>
+
+                    <!-- BUTTONS -->
+
+                    <div class="row mt-4">
+
+                        <div class="col-md-6">
+
+                            <button
+                            type="submit"
+                            class="btn btn-premium w-100">
+
+                                🚀 Publish Event
+
+                            </button>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <a
+                            href="{% url 'event_list' %}"
+                            class="btn btn-dark w-100">
+
+                                Cancel
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <!-- SIDEBAR -->
+
+        <div class="col-lg-4">
+
+            <!-- ORGANIZER -->
+
+            <div class="organizer-card">
+
+                <div class="organizer-avatar">
+
+                    👨‍💼
+
+                </div>
+
+                <div>
+
+                    <h5>
+
+                        Organizer
+
+                    </h5>
+
+                    <p>
+
+                        {{ request.user.username }}
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- STATS -->
+
+            <div class="payment-card mt-4">
+
+                <h4>
+
+                    📊 Platform Statistics
+
+                </h4>
+
+                <hr>
+
+                <p>
+
+                    🎫 5000+ Tickets Sold
+
+                </p>
+
+                <p>
+
+                    🎉 100+ Events Hosted
+
+                </p>
+
+                <p>
+
+                    👥 2500+ Users
+
+                </p>
+
+            </div>
+
+            <!-- EVENT TIPS -->
+
+            <div class="timeline-card mt-4">
+
+                <h4>
+
+                    💡 Event Creation Tips
+
+                </h4>
+
+                <div class="timeline-step">
+
+                    Use a clear title
+
+                </div>
+
+                <div class="timeline-step">
+
+                    Add a professional banner
+
+                </div>
+
+                <div class="timeline-step">
+
+                    Provide complete details
+
+                </div>
+
+                <div class="timeline-step">
+
+                    Set accurate ticket count
+
+                </div>
+
+            </div>
+
+            <!-- BENEFITS -->
+
+            <div class="facilities-card mt-4">
+
+                <h4>
+
+                    🏆 Why Publish Here?
+
+                </h4>
+
+                <div class="facility-item">
+
+                    Easy Event Management
+
+                </div>
+
+                <div class="facility-item">
+
+                    Real-Time Bookings
+
+                </div>
+
+                <div class="facility-item">
+
+                    Secure Ticket System
+
+                </div>
+
+                <div class="facility-item">
+
+                    QR Verification
+
+                </div>
+
+            </div>
+
+            <!-- SUPPORT -->
+
+            <div class="ticket-footer mt-4">
+
+                <h5>
+
+                    📞 Need Help?
+
+                </h5>
+
+                <p>
+
+                    support@eventhub.com
+
+                </p>
+
+                <p>
+
+                    +91 9876543210
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

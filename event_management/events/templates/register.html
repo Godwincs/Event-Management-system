@@ -1,0 +1,227 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="auth-page">
+
+    <div class="auth-container">
+
+        <!-- LEFT SIDE -->
+
+        <div class="auth-left">
+
+            <div class="floating-icon icon-1">
+                🎉
+            </div>
+
+            <div class="floating-icon icon-2">
+                🎫
+            </div>
+
+            <h1>
+
+                Join EventHub
+
+            </h1>
+
+            <p>
+
+                Create your account and start booking amazing events.
+
+            </p>
+
+        </div>
+
+        <!-- RIGHT SIDE -->
+
+        <div class="auth-right">
+
+            <div class="auth-title">
+
+                <h2>
+
+                    Create Account
+
+                </h2>
+
+                <p>
+
+                    Register and start your journey
+
+                </p>
+
+            </div>
+
+            {% if form.errors %}
+
+            <div class="alert alert-danger">
+
+                {{ form.errors }}
+
+            </div>
+
+            {% endif %}
+
+            <form method="POST" class="auth-form">
+
+                {% csrf_token %}
+
+                <input
+                    type="text"
+                    name="username"
+                    placeholder="Username"
+                    class="form-control"
+                    required>
+
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Email Address"
+                    class="form-control"
+                    required>
+
+                <div class="password-wrapper">
+
+                    <input
+                        type="password"
+                        name="password1"
+                        id="password1"
+                        placeholder="Password"
+                        class="form-control"
+                        required>
+
+                    <span
+                        class="password-toggle"
+                        onclick="togglePassword1()">
+
+                        👁️
+
+                    </span>
+
+                </div>
+
+                <div class="password-wrapper">
+
+                    <input
+                        type="password"
+                        name="password2"
+                        id="password2"
+                        placeholder="Confirm Password"
+                        class="form-control"
+                        required>
+
+                    <span
+                        class="password-toggle"
+                        onclick="togglePassword2()">
+
+                        👁️
+
+                    </span>
+
+                </div>
+
+                <div class="terms-check">
+
+                    <input
+                        type="checkbox"
+                        required>
+
+                    I agree to the Terms & Conditions
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="auth-btn">
+
+                    🚀 Create Account
+
+                </button>
+
+            </form>
+
+            <div class="auth-divider">
+
+                OR
+
+            </div>
+
+            <div class="social-login">
+
+                <h6>
+
+                    Register With
+
+                </h6>
+
+                <div class="social-buttons">
+
+                    <div class="social-btn">
+                        G
+                    </div>
+
+                    <div class="social-btn">
+                        F
+                    </div>
+
+                    <div class="social-btn">
+                        X
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="auth-footer">
+
+                Already have an account?
+
+                <a href="{% url 'login' %}">
+
+                    Login
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+function togglePassword1(){
+
+    var x =
+    document.getElementById("password1");
+
+    if(x.type==="password"){
+
+        x.type="text";
+
+    }else{
+
+        x.type="password";
+    }
+}
+
+function togglePassword2(){
+
+    var x =
+    document.getElementById("password2");
+
+    if(x.type==="password"){
+
+        x.type="text";
+
+    }else{
+
+        x.type="password";
+    }
+}
+
+</script>
+
+{% endblock %}

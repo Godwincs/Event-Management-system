@@ -1,0 +1,419 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- PAGE HEADER -->
+
+<section class="event-list-section">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>
+
+                Explore Events
+
+            </h2>
+
+            <p>
+
+                Discover upcoming events and book your tickets instantly.
+
+            </p>
+
+        </div>
+
+        <!-- SEARCH BAR -->
+
+        <div class="glass-card p-4 mb-5">
+
+            <form method="GET">
+
+                <div class="row">
+
+                    <div class="col-md-10">
+
+                        <input
+                            type="text"
+                            name="q"
+                            class="form-control"
+                            placeholder="Search events...">
+
+                    </div>
+
+                    <div class="col-md-2">
+
+                        <button
+                            type="submit"
+                            class="btn btn-premium w-100">
+
+                            Search
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+        <!-- EVENT CARDS -->
+
+        <div class="row">
+
+            {% for event in events %}
+
+            <div class="col-lg-4 col-md-6 mb-4">
+
+                <div class="event-card">
+
+                    {% if event.image %}
+
+                    <img
+                        src="{{ event.image.url }}"
+                        alt="{{ event.title }}">
+
+                    {% else %}
+
+                    <img
+                        src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30"
+                        alt="Event">
+
+                    {% endif %}
+
+                    <div class="event-card-body">
+
+                        <span class="event-date">
+
+                            {{ event.date }}
+
+                        </span>
+
+                        <h4>
+
+                            {{ event.title }}
+
+                        </h4>
+
+                        <p>
+
+                            {{ event.description|truncatewords:20 }}
+
+                        </p>
+
+                        <p class="event-location">
+
+                            📍 {{ event.venue }}
+
+                        </p>
+
+                        <hr>
+
+                        <div class="d-flex justify-content-between align-items-center">
+
+                            <span class="badge-premium">
+
+                                🎟 {{ event.available_tickets }}
+                                Left
+
+                            </span>
+
+                            <span>
+
+                                Event ID:
+                                #{{ event.id }}
+
+                            </span>
+
+                        </div>
+
+                       <div class="mt-4 d-grid gap-2">
+
+    <a
+        href="{% url 'event_detail' event.id %}"
+        class="btn btn-premium">
+
+        View Details
+
+    </a>
+
+    <a
+        href="{% url 'book_ticket' event.id %}"
+        class="btn btn-success-premium">
+
+        🎟 Book Ticket
+
+    </a>
+
+</div>
+
+{% if request.user.is_staff %}
+
+<div class="admin-actions mt-3">
+
+    <a
+        href="{% url 'edit_event' event.id %}"
+        class="btn btn-warning">
+
+        ✏️ Edit
+
+    </a>
+
+    <a
+        href="{% url 'delete_event' event.id %}"
+        class="btn btn-danger">
+
+        🗑 Delete
+
+    </a>
+
+</div>
+
+{% endif %}
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% empty %}
+
+            <div class="col-12">
+
+                <div class="empty-booking">
+
+                    <i class="bi bi-calendar-x"></i>
+
+                    <h2>
+
+                        No Events Found
+
+                    </h2>
+
+                    <p>
+
+                        There are currently no events available.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+ 
+
+        <!-- EVENT STATISTICS -->
+
+        <div class="row mt-5">
+
+            <div class="col-md-3">
+
+                <div class="stats-card">
+
+                    <i class="bi bi-calendar-event"></i>
+
+                    <h2>
+
+                        {{ events.count }}
+
+                    </h2>
+
+                    <p>
+
+                        Events
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <div class="stats-card">
+
+                    <i class="bi bi-ticket-perforated"></i>
+
+                    <h2>
+
+                        500+
+
+                    </h2>
+
+                    <p>
+
+                        Tickets Sold
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <div class="stats-card">
+
+                    <i class="bi bi-people"></i>
+
+                    <h2>
+
+                        1000+
+
+                    </h2>
+
+                    <p>
+
+                        Visitors
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <div class="stats-card">
+
+                    <i class="bi bi-star-fill"></i>
+
+                    <h2>
+
+                        4.9
+
+                    </h2>
+
+                    <p>
+
+                        Rating
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- CATEGORIES -->
+
+        <div class="category-section">
+
+            <div class="section-title">
+
+                <h2>
+
+                    Popular Categories
+
+                </h2>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-3">
+
+                    <div class="category-card">
+
+                        <i class="bi bi-music-note-beamed"></i>
+
+                        <h4>
+
+                            Music
+
+                        </h4>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <div class="category-card">
+
+                        <i class="bi bi-laptop"></i>
+
+                        <h4>
+
+                            Technology
+
+                        </h4>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <div class="category-card">
+
+                        <i class="bi bi-trophy"></i>
+
+                        <h4>
+
+                            Sports
+
+                        </h4>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <div class="category-card">
+
+                        <i class="bi bi-palette"></i>
+
+                        <h4>
+
+                            Cultural
+
+                        </h4>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- CTA -->
+
+        <div class="cta-section mt-5">
+
+            <h2>
+
+                Want To Host An Event?
+
+            </h2>
+
+            <p>
+
+                Create and manage your own events professionally.
+
+            </p>
+
+            <a
+                href="{% url 'create_event' %}"
+                class="btn btn-light btn-lg">
+
+                Create Event
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
